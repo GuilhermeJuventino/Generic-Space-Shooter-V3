@@ -1,0 +1,58 @@
+{ "frames": {
+   "Spaceship2 0.gif": {
+    "frame": { "x": 0, "y": 0, "w": 26, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 26, "h": 37 },
+    "sourceSize": { "w": 26, "h": 37 },
+    "duration": 100
+   },
+   "Spaceship2 1.gif": {
+    "frame": { "x": 26, "y": 0, "w": 26, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 26, "h": 37 },
+    "sourceSize": { "w": 26, "h": 37 },
+    "duration": 100
+   },
+   "Spaceship2 2.gif": {
+    "frame": { "x": 52, "y": 0, "w": 26, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 26, "h": 37 },
+    "sourceSize": { "w": 26, "h": 37 },
+    "duration": 100
+   },
+   "Spaceship2 3.gif": {
+    "frame": { "x": 78, "y": 0, "w": 26, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 26, "h": 37 },
+    "sourceSize": { "w": 26, "h": 37 },
+    "duration": 100
+   },
+   "Spaceship2 4.gif": {
+    "frame": { "x": 104, "y": 0, "w": 26, "h": 37 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 26, "h": 37 },
+    "sourceSize": { "w": 26, "h": 37 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "Spaceship2.png",
+  "format": "I8",
+  "size": { "w": 130, "h": 37 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

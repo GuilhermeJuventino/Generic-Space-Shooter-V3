@@ -1,0 +1,47 @@
+Goal: Have a minimum viable product (That being the core mechanics ready) by the end of the month.
+
+
+Project structure
+
+Every object (Static or dynamic) like a player or an enemy or a hazard will inherit from a game object class
+or a sprite class. (I'll see once I start working on it.)
+
+Ideally, the game should also have a system that will handle the animation of sprite sheets.
+
+
+Possible inheritance order
+
+class GameObject(pygame.sprite.Sprite):
+
+class GameCharacter(GameObject):
+
+class Player(GameCharacter):
+
+class Enemy(GameCharacter):
+
+
+To Do list
+
+1: Restructure the code with multiple files to make it easier to work with.
+
+2: Make a functional player class.
+
+3: Make a functional enemy class.
+
+4: Make a functional projectile class, or a system for the player to shoot projectiles.
+
+5: Make a system that manages game states. (Title screen, in game state, pause screen, and game over screen.)
+
+
+In progress list
+
+1: Restructure the code with multiple files to make it easier to work with.
+
+2: Make a functional player class.
+
+3: Make a functional enemy class.
+
+
+Complete
+
+6 Make a system that manages animations with sprite sheets.
