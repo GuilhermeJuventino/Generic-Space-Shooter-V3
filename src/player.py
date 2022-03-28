@@ -2,7 +2,7 @@ import pygame
 import constants as c
 from math import sqrt, floor
 from game_character import GameCharacter
-from projectile import Projectile
+from object_spawner import ObjectSpawner
 
 
 class Player(GameCharacter):
@@ -16,7 +16,9 @@ class Player(GameCharacter):
         self.rect = self.image.get_rect()
         self.rect.center = position
 
-        self.projectile_group = pygame.sprite.Group()
+        # self.projectile_group = pygame.sprite.Group()
+        # self.projectile = Projectile("src/images/bullet.png", (self.rect.centerx, self.rect.top), 11, 11)
+        self.projectile_spawner = ObjectSpawner()
         self.ready = True
         self.cooldown = 300
         self.projectile_time = 0
@@ -29,7 +31,8 @@ class Player(GameCharacter):
         self.move_player()
         self.animate_player()
         self.recharge()
-        self.projectile_group.update()
+        self.projectile_spawner.update()
+        # self.projectile_group.update()
 
     def recharge(self):
         if not self.ready:
@@ -38,8 +41,10 @@ class Player(GameCharacter):
                 self.ready = True
 
     def shoot_projectile(self):
-        # self.projectile = Projectile("src/images/bullet.png", (self.rect.centex))
-        self.projectile_group.add(Projectile("src/images/bullet.png", (self.rect.centerx, self.rect.top), 11, 11))
+        # self.projectile_group.add(Projectile("src/images/bullet.png", (self.rect.centerx, self.rect.top), 11, 11))
+        # self.projectile = Projectile("src/images/bullet.png", (self.rect.centerx, self.rect.top), 11, 11)
+        # self.projectile_spawner = ObjectSpawner(self.projectile)
+        self.projectile_spawner.spawn(self.rect.centerx, self.rect.top)
 
     def animate_player(self):
         self.idle_animation = [self.spritesheet.get_sprite(0, 0, self.width, self.height).convert_alpha(),

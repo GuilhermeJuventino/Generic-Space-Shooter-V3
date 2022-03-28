@@ -34,7 +34,8 @@ while True:
     # Drawing sprite groups.
     player_group.draw(window)
     enemy_spawner.enemy_group.draw(window)
-    player.projectile_group.draw(window)
+    #player.projectile_group.draw(window)
+    player.projectile_spawner.object_group.draw(window)
 
     # Updating sprite groups.
     player_group.update()
