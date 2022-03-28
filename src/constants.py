@@ -1,3 +1,5 @@
+import pygame
+
 # SCALING AND FPS
 FULL_SCREEN = 0
 SCALE = 1
@@ -47,3 +49,15 @@ DIR_IMAGES = "\\images\\"
 DIR_MUSIC = "\\music\\"
 DIR_SOUNDS = "\\sounds\\"
 DIR_SPRITESHEETS = "\\spritesheets\\"
+
+# ASSETS INFORMATION
+
+# SPRITES/SPRITESHEETS
+SHIP = pygame.image.load("src/spritesheets/Spaceship2.png")
+PROJECTILE = pygame.image.load("src/images/bullet.png")
+ASTEROID = pygame.image.load("src/images/Asteroid.png")
+
+# SOUND EFFECTS
+'''PROJECTILE_SOUND = pygame.mixer.Sound("src/sounds/Laser.wav")
+HIT_HURT_SOUND = pygame.mixer.Sound("src/sounds/Hit_Hurt.wav")
+EXPLOSION_SOUND = pygame.mixer.Sound("src/sounds/Explosion.wav")'''

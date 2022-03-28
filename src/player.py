@@ -3,6 +3,7 @@ import constants as c
 from math import sqrt, floor
 from game_character import GameCharacter
 from object_spawner import ObjectSpawner
+from projectile import Projectile
 
 
 class Player(GameCharacter):
@@ -16,8 +17,6 @@ class Player(GameCharacter):
         self.rect = self.image.get_rect()
         self.rect.center = position
 
-        # self.projectile_group = pygame.sprite.Group()
-        # self.projectile = Projectile("src/images/bullet.png", (self.rect.centerx, self.rect.top), 11, 11)
         self.projectile_spawner = ObjectSpawner()
         self.ready = True
         self.cooldown = 300
@@ -32,7 +31,6 @@ class Player(GameCharacter):
         self.animate_player()
         self.recharge()
         self.projectile_spawner.update()
-        # self.projectile_group.update()
 
     def recharge(self):
         if not self.ready:
@@ -41,10 +39,8 @@ class Player(GameCharacter):
                 self.ready = True
 
     def shoot_projectile(self):
-        # self.projectile_group.add(Projectile("src/images/bullet.png", (self.rect.centerx, self.rect.top), 11, 11))
-        # self.projectile = Projectile("src/images/bullet.png", (self.rect.centerx, self.rect.top), 11, 11)
-        # self.projectile_spawner = ObjectSpawner(self.projectile)
-        self.projectile_spawner.spawn(self.rect.centerx, self.rect.top)
+        new_projectile = Projectile(c.PROJECTILE, (self.rect.centerx, self.rect.top), 11, 11)
+        self.projectile_spawner.spawn(new_projectile)
 
     def animate_player(self):
         self.idle_animation = [self.spritesheet.get_sprite(0, 0, self.width, self.height).convert_alpha(),
@@ -95,6 +91,9 @@ class Player(GameCharacter):
             self.ready = False
             self.projectile_time = pygame.time.get_ticks()
 
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
+
         # Preventing player from leaving the screen.
         if self.rect.top <= 0:
             self.rect.top = 0
@@ -107,6 +106,3 @@ class Player(GameCharacter):
 
         elif self.rect.right >= c.DISPLAY_WIDTH:
             self.rect.right = c.DISPLAY_WIDTH
-
-        self.rect.x += self.speed_x
-        self.rect.y += self.speed_y

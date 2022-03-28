@@ -24,24 +24,28 @@ To Do list
 
 1: Restructure the code with multiple files to make it easier to work with.
 
-2: Make a functional player class.
+2: Make a system for handling collision between objects.
 
-3: Make a functional enemy class.
+3: Make a system that manages game states. (Title screen, in game state, pause screen, and game over screen.)
 
-4: Make a functional projectile class, or a system for the player to shoot projectiles.
+4: Make a system for handling audio. (That being playing sound effects and music.)
 
-5: Make a system that manages game states. (Title screen, in game state, pause screen, and game over screen.)
+5: Improve the sprite sheet animation system
 
 
 In progress list
 
 1: Restructure the code with multiple files to make it easier to work with.
 
-2: Make a functional player class.
-
-3: Make a functional enemy class.
-
 
 Complete
 
-6 Make a system that manages animations with sprite sheets.
+1: Make a functional player class.
+
+2: Make a system that manages animations with sprite sheets.
+
+3: Make a functional projectile class or a system for the player to shoot projectiles.
+
+4: Make a functional enemy class.
+
+5: Fix the bugged way the player's ship acts when reaching the limit's of the window.

@@ -1,15 +1,16 @@
-import pygame
+import constants as c
 from random import randrange
-from enemy import Enemy
+from asteroid import Asteroid
+from object_spawner import ObjectSpawner
 
 
-class EnemySpawner:
+class AsteroidTimer:
     def __init__(self):
-        self.enemy_group = pygame.sprite.Group()
+        self.asteroid_spawner = ObjectSpawner()
         self.spawn_timer = randrange(30, 120)
 
     def update(self):
-        self.enemy_group.update()
+        self.asteroid_spawner.update()
 
         if self.spawn_timer == 0:
             self.spawn_enemy()
@@ -18,5 +19,5 @@ class EnemySpawner:
         self.spawn_timer -= 1
 
     def spawn_enemy(self):
-        new_enemy = Enemy("src/images/Asteroid.png", 11, 7)
-        self.enemy_group.add(new_enemy)
+        new_enemy = Asteroid(c.ASTEROID, 11, 7)
+        self.asteroid_spawner.spawn(new_enemy)

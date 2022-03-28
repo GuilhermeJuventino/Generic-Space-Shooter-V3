@@ -1,19 +1,14 @@
 import pygame
 import constants as c
-from random import randrange
 from game_character import GameCharacter
 
 
 class Enemy(GameCharacter):
-    def __init__(self, image, width, height):
+    def __init__(self, image, position, width, height):
         super(Enemy, self).__init__(image, width, height)
         self.image = pygame.transform.scale(self.image, (self.width * 8, self.height * 8))
         self.rect = self.image.get_rect()
-        self.rect.x = randrange(0, c.DISPLAY_WIDTH - self.rect.width)
-        self.rect.y = -self.rect.height
-
-        self.speed_x = randrange(-3, 3)
-        self.speed_y = randrange(6, 8)
+        self.rect.center = position
 
     def update(self):
         super(Enemy, self).update()
