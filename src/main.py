@@ -21,6 +21,8 @@ collider = ObjectCollider()
 player_group = pygame.sprite.Group()
 player_group.add(player)
 
+# pygame.font.Font(None, size)
+
 while True:
     # Setting the framerate.
     clock.tick(c.FPS)

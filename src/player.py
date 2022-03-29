@@ -95,8 +95,8 @@ class Player(GameCharacter):
         self.rect.y += self.speed_y
 
         # Preventing player from leaving the screen.
-        if self.rect.top <= 0:
-            self.rect.top = 0
+        if self.rect.top <= 100:
+            self.rect.top = 100
 
         elif self.rect.bottom >= c.DISPLAY_BOTTOM:
             self.rect.bottom = c.DISPLAY_BOTTOM

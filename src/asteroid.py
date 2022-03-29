@@ -9,7 +9,7 @@ class Asteroid(Enemy):
         self.image = pygame.transform.scale(self.image, (self.width * 8, self.height * 8))
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
-        self.rect.y = -self.rect.height
+        self.rect.y = 100
         self.speed_x = randrange(-3, 3)
         self.speed_y = randrange(6, 8)
 
