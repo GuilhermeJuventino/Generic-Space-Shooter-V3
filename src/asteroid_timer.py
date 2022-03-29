@@ -6,11 +6,11 @@ from object_spawner import ObjectSpawner
 
 class AsteroidTimer:
     def __init__(self):
-        self.asteroid_spawner = ObjectSpawner()
+        self.spawner = ObjectSpawner()
         self.spawn_timer = randrange(30, 120)
 
     def update(self):
-        self.asteroid_spawner.update()
+        self.spawner.update()
 
         if self.spawn_timer == 0:
             self.spawn_enemy()
@@ -19,5 +19,6 @@ class AsteroidTimer:
         self.spawn_timer -= 1
 
     def spawn_enemy(self):
-        new_enemy = Asteroid(c.ASTEROID, 11, 7)
-        self.asteroid_spawner.spawn(new_enemy)
+        x = randrange(0, c.DISPLAY_WIDTH - 11)
+        new_enemy = Asteroid(c.ASTEROID, (x, 0), 11, 7)
+        self.spawner.spawn(new_enemy)

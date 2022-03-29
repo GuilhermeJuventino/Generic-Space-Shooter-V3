@@ -17,7 +17,7 @@ class Player(GameCharacter):
         self.rect = self.image.get_rect()
         self.rect.center = position
 
-        self.projectile_spawner = ObjectSpawner()
+        self.projectile = ObjectSpawner()
         self.ready = True
         self.cooldown = 300
         self.projectile_time = 0
@@ -30,7 +30,7 @@ class Player(GameCharacter):
         self.move_player()
         self.animate_player()
         self.recharge()
-        self.projectile_spawner.update()
+        self.projectile.update()
 
     def recharge(self):
         if not self.ready:
@@ -40,7 +40,7 @@ class Player(GameCharacter):
 
     def shoot_projectile(self):
         new_projectile = Projectile(c.PROJECTILE, (self.rect.centerx, self.rect.top), 11, 11)
-        self.projectile_spawner.spawn(new_projectile)
+        self.projectile.spawn(new_projectile)
 
     def animate_player(self):
         self.idle_animation = [self.spritesheet.get_sprite(0, 0, self.width, self.height).convert_alpha(),

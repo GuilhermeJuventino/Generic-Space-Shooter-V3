@@ -49,3 +49,5 @@ Complete
 4: Make a functional enemy class.
 
 5: Fix the bugged way the player's ship acts when reaching the limit's of the window.
+
+6: Make a system for handling collision between objects.
