@@ -1,3 +1,4 @@
+import pygame
 from game_object import GameObject
 
 
@@ -10,5 +11,5 @@ class Projectile(GameObject):
     def update(self):
         self.rect.y -= self.speed_y
 
-        if self.rect.bottom < 0:
+        if self.rect.bottom < 100:
             self.kill()

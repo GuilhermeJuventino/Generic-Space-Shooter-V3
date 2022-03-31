@@ -4,6 +4,7 @@ from math import sqrt, floor
 from game_character import GameCharacter
 from object_spawner import ObjectSpawner
 from projectile import Projectile
+from sound_effects import SoundEffects
 
 
 class Player(GameCharacter):
@@ -21,6 +22,7 @@ class Player(GameCharacter):
         self.ready = True
         self.cooldown = 300
         self.projectile_time = 0
+        self.projectile_sound = SoundEffects(c.PROJECTILE_SOUND, 0.3)
 
         self.animation_loop = 0
 
@@ -40,6 +42,7 @@ class Player(GameCharacter):
 
     def shoot_projectile(self):
         new_projectile = Projectile(c.PROJECTILE, (self.rect.centerx, self.rect.top), 11, 11)
+        self.projectile_sound.play()
         self.projectile.spawn(new_projectile)
 
     def animate_player(self):

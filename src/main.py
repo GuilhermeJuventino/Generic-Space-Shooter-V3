@@ -5,9 +5,11 @@ from sys import exit
 from player import Player
 from asteroid_timer import AsteroidTimer
 from object_collider import ObjectCollider
+from sound_effects import SoundEffects
 
 pygame.init()
 clock = pygame.time.Clock()
+pygame.mixer.pre_init(44100, -16, 2, 512)
 
 # Game window
 window = pygame.display.set_mode(c.DISPLAY_SIZE)
@@ -20,6 +22,10 @@ collider = ObjectCollider()
 # Sprite groups.
 player_group = pygame.sprite.Group()
 player_group.add(player)
+
+# Sound effects.
+explosion = SoundEffects(c.EXPLOSION_SOUND, 0.3)
+hit_hurt = SoundEffects(c.HIT_HURT_SOUND, 0.6)
 
 # Text variables.
 score = 0
@@ -38,15 +44,21 @@ while True:
             pygame.quit()
             exit()
 
+
     if collider.check_collision(player.projectile.group, asteroid_timer.spawner.group):
         pygame.sprite.groupcollide(player.projectile.group, asteroid_timer.spawner.group, True, True)
+        hit_hurt.play()
+        explosion.play()
         score += 1
 
     if collider.check_collision(player_group, asteroid_timer.spawner.group) and not player_invincible:
         pygame.sprite.groupcollide(player_group, asteroid_timer.spawner.group, True, True)
         player.projectile.group.empty()
+        hit_hurt.play()
+        explosion.play()
         lives -= 1
         player.alive = False
+
         if player_invincible:
             pygame.sprite.groupcollide(player_group, asteroid_timer.spawner.group, False, True)
 

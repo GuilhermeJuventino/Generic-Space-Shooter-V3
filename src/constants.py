@@ -58,6 +58,6 @@ PROJECTILE = pygame.image.load("src/images/bullet.png")
 ASTEROID = pygame.image.load("src/images/Asteroid.png")
 
 # SOUND EFFECTS
-'''PROJECTILE_SOUND = pygame.mixer.Sound("src/sounds/Laser.wav")
-HIT_HURT_SOUND = pygame.mixer.Sound("src/sounds/Hit_Hurt.wav")
-EXPLOSION_SOUND = pygame.mixer.Sound("src/sounds/Explosion.wav")'''
+PROJECTILE_SOUND = "src/sounds/Laser.wav"
+HIT_HURT_SOUND = "src/sounds/Hit_Hurt.wav"
+EXPLOSION_SOUND = "src/sounds/Explosion.wav"

@@ -10,4 +10,3 @@ class GameObject(pygame.sprite.Sprite):
         self.spritesheet = Spritesheet(image)
         self.image = self.spritesheet.get_sprite(0, 0, self.width, self.height).convert_alpha()
         self.rect = self.image.get_rect()
-
