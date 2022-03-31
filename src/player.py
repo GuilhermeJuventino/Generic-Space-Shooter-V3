@@ -18,6 +18,12 @@ class Player(GameCharacter):
         self.rect = self.image.get_rect()
         self.rect.center = position
 
+        self.idle_animation = [self.spritesheet.get_sprite(0, 0, self.width, self.height).convert_alpha(),
+                               self.spritesheet.get_sprite(26, 0, self.width, self.height).convert_alpha(),
+                               self.spritesheet.get_sprite(52, 0, self.width, self.height).convert_alpha(),
+                               self.spritesheet.get_sprite(78, 0, self.width, self.height).convert_alpha(),
+                               self.spritesheet.get_sprite(104, 0, self.width, self.height).convert_alpha()]
+
         self.projectile = ObjectSpawner()
         self.ready = True
         self.cooldown = 300
@@ -46,12 +52,6 @@ class Player(GameCharacter):
         self.projectile.spawn(new_projectile)
 
     def animate_player(self):
-        self.idle_animation = [self.spritesheet.get_sprite(0, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(26, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(52, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(78, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(104, 0, self.width, self.height).convert_alpha()]
-
         for i in range(0, 5):
             self.idle_animation[i] = pygame.transform.scale(self.idle_animation[i], (self.width * 2, self.height * 2))
 

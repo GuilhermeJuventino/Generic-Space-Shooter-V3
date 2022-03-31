@@ -44,7 +44,6 @@ while True:
             pygame.quit()
             exit()
 
-
     if collider.check_collision(player.projectile.group, asteroid_timer.spawner.group):
         pygame.sprite.groupcollide(player.projectile.group, asteroid_timer.spawner.group, True, True)
         hit_hurt.play()
