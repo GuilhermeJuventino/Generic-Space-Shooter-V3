@@ -53,8 +53,6 @@ while True:
         if lives <= 0:
             lives = 0
 
-    print(player_invincibility_timer)
-
     if player_death_timer > 0 and not player.alive:
         player_death_timer -= 1
         if player_death_timer == 0:
