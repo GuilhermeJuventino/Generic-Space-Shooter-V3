@@ -1,8 +1,8 @@
 Goal 1: Have a minimum viable product (That being the core mechanics ready) by the end of the month. (Achieved)
 
-Goal 2: Have a hud ready by the next month.
+Goal 2: Have a hud ready by the next month. (Achieved)
 
-Goal 3: A death and respawn system.
+Goal 3: A death and respawn system. (Achieved)
 
 Goal 4: One or two new enemies.
 
@@ -61,4 +61,6 @@ Complete
 6: Make a system for handling collision between objects.
 
 7: Restructure the code with multiple files to make it easier to work with.
+
+8: Add a death system.
 
