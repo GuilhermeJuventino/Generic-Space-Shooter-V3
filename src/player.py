@@ -4,7 +4,7 @@ from math import sqrt, floor
 from game_character import GameCharacter
 from object_spawner import ObjectSpawner
 from projectile import Projectile
-from sound_effects import SoundEffects
+from src.sound_effects import SoundEffects
 
 
 class Player(GameCharacter):

@@ -5,7 +5,7 @@ from sys import exit
 from player import Player
 from asteroid_timer import AsteroidTimer
 from object_collider import ObjectCollider
-from sound_effects import SoundEffects
+from src.sound_effects import SoundEffects
 
 pygame.init()
 clock = pygame.time.Clock()
