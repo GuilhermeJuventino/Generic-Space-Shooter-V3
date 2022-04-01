@@ -4,7 +4,8 @@ from math import sqrt, floor
 from game_character import GameCharacter
 from object_spawner import ObjectSpawner
 from projectile import Projectile
-from src.sound_effects import SoundEffects
+from sound_effects import SoundEffects
+from spritesheet import SpriteSheet
 
 
 class Player(GameCharacter):
@@ -14,15 +15,11 @@ class Player(GameCharacter):
         self.speed_y = 0
         self.speed = 5
 
-        self.image = pygame.transform.scale(self.image, (self.width * 2, self.height * 2))
+        self.spritesheet = SpriteSheet(image)
+        self.idle_animation = self.spritesheet.get_images(1, 5, 26, 37)
+        self.image = self.idle_animation[0]
         self.rect = self.image.get_rect()
         self.rect.center = position
-
-        self.idle_animation = [self.spritesheet.get_sprite(0, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(26, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(52, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(78, 0, self.width, self.height).convert_alpha(),
-                               self.spritesheet.get_sprite(104, 0, self.width, self.height).convert_alpha()]
 
         self.projectile = ObjectSpawner()
         self.ready = True
@@ -52,9 +49,6 @@ class Player(GameCharacter):
         self.projectile.spawn(new_projectile)
 
     def animate_player(self):
-        for i in range(0, 5):
-            self.idle_animation[i] = pygame.transform.scale(self.idle_animation[i], (self.width * 2, self.height * 2))
-
         self.image = self.idle_animation[floor(self.animation_loop)]
         self.animation_loop += 0.25
 

@@ -20,5 +20,5 @@ class AsteroidTimer:
 
     def spawn_enemy(self):
         x = randrange(0, c.DISPLAY_WIDTH - 11)
-        new_enemy = Asteroid(c.ASTEROID, (x, 0), 11, 7)
+        new_enemy = Asteroid(c.ASTEROID, (x, 0), 28, 20)
         self.spawner.spawn(new_enemy)

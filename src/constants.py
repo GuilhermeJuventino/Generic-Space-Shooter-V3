@@ -55,7 +55,8 @@ DIR_SPRITESHEETS = "\\spritesheets\\"
 # SPRITES/SPRITESHEETS
 SHIP = pygame.image.load("src/spritesheets/Spaceship2.png")
 PROJECTILE = pygame.image.load("src/images/bullet.png")
-ASTEROID = pygame.image.load("src/images/Asteroid.png")
+ASTEROID = pygame.image.load("src/images/Asteroid2.png")
+RED_ASTEROID = pygame.image.load("src/images/Red_Asteroid.png")
 
 # SOUND EFFECTS
 PROJECTILE_SOUND = "src/sounds/Laser.wav"
