@@ -44,7 +44,7 @@ class Player(GameCharacter):
                 self.ready = True
 
     def shoot_projectile(self):
-        new_projectile = Projectile(c.PROJECTILE, (self.rect.centerx, self.rect.top), 11, 11)
+        new_projectile = Projectile(c.LASER, (self.rect.centerx, self.rect.top), 4, 15)
         self.projectile_sound.play()
         self.projectile.spawn(new_projectile)
 
