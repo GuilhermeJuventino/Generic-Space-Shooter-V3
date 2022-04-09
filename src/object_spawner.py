@@ -11,3 +11,6 @@ class ObjectSpawner:
 
     def update(self):
         self.group.update()
+
+    def clear(self):
+        self.group.empty()

@@ -16,7 +16,7 @@ class Player(GameCharacter):
         self.speed = 5
 
         self.spritesheet = SpriteSheet(image)
-        self.idle_animation = self.spritesheet.get_images(1, 5, 26, 37)
+        self.idle_animation = self.spritesheet.get_images(1, 5, 26, 37, scale=1.5)
         self.image = self.idle_animation[0]
         self.rect = self.image.get_rect()
         self.rect.center = position
@@ -54,6 +54,10 @@ class Player(GameCharacter):
         if self.animation_loop >= 5:
             self.animation_loop = 0
 
+    def normalize_speed(self):
+        self.speed_x = self.speed_x * (sqrt(2) / 2)
+        self.speed_y = self.speed_y * (sqrt(2) / 2)
+
     def move_player(self):
         self.keystate = pygame.key.get_pressed()
 
@@ -66,8 +70,7 @@ class Player(GameCharacter):
 
         # Preventing increase of speed while moving diagonally.
         elif self.speed_x != 0 and self.speed_y != 0:
-            self.speed_x = self.speed_x * (sqrt(2) / 2)
-            self.speed_y = self.speed_y * (sqrt(2) / 2)
+            self.normalize_speed()
 
         else:
             self.speed_x = 0
