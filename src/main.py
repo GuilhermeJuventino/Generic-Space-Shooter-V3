@@ -7,6 +7,7 @@ from asteroid_timer import AsteroidTimer
 from object_collider import ObjectCollider
 from sound_effects import SoundEffects
 from explosion import Explosion
+from hud import HUD
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -19,6 +20,7 @@ window = pygame.display.set_mode(c.DISPLAY_SIZE)
 player = Player(c.SHIP, (c.DISPLAY_WIDTH_CENTER, c.DISPLAY_BOTTOM), 26, 37)
 asteroid_timer = AsteroidTimer()
 collider = ObjectCollider()
+hud = HUD(c.HUD, (60, c.DISPLAY_TOP + 20), 92, 14)
 
 # Sprite groups.
 player_group = pygame.sprite.Group()
@@ -26,6 +28,8 @@ player_group.add(player)
 asteroid_group = pygame.sprite.Group()
 projectile_group = pygame.sprite.Group()
 explosion_group = pygame.sprite.Group()
+hud_group = pygame.sprite.Group()
+hud_group.add(hud)
 
 # Sound effects.
 explosion_sound = SoundEffects(c.EXPLOSION_SOUND, 0.3)
@@ -34,7 +38,7 @@ hit_hurt_sound = SoundEffects(c.HIT_HURT_SOUND, 0.6)
 # Text variables.
 score = 0
 lives = 3
-font = pygame.font.Font("freesansbold.ttf", 32)
+font = pygame.font.Font("freesansbold.ttf", 25)
 player_death_timer = 200
 player_invincibility_timer = 300
 player_invincible = False
@@ -57,12 +61,11 @@ while True:
             explosion_sound.play()
             score += 1
 
+            if score >= 999:
+                score = 999
+
     if not player_invincible:
         for p, colls in pygame.sprite.groupcollide(player_group, asteroid_group, True, True).items():
-
-            for pr in projectile_group:
-                pr.kill()
-
             hit_hurt_sound.play()
             explosion = Explosion(c.EXPLOSION, p.rect.center, 30, 30)
             explosion_group.add(explosion)
@@ -71,7 +74,6 @@ while True:
             player.alive = False
 
     if player_invincible:
-
         for asteroid, colls in pygame.sprite.groupcollide(asteroid_group, player_group, True, False).items():
             hit_hurt_sound.play()
             explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
@@ -110,14 +112,17 @@ while True:
     projectile_group.draw(window)
     explosion_group.draw(window)
 
+    hud_group.draw(window)
+
     score_text = font.render(f"Score: {score}", False, color.LIGHT_GREY)
-    window.blit(score_text, (c.DISPLAY_LEFT + 30, c.DISPLAY_TOP + 20))
+    window.blit(score_text, (c.DISPLAY_LEFT + 98, c.DISPLAY_TOP + 39))
 
     lives_text = font.render(f"Lives: {lives}", False, color.LIGHT_GREY)
-    window.blit(lives_text, (c.DISPLAY_RIGHT - 160, c.DISPLAY_TOP + 20))
+    window.blit(lives_text, (c.DISPLAY_RIGHT - 255, c.DISPLAY_TOP + 39))
 
     # Updating sprite groups.
     player_group.update()
     asteroid_timer.update()
+    projectile_group.update()
     explosion_group.update()
     pygame.display.update()

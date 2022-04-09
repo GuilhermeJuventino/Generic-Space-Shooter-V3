@@ -35,7 +35,6 @@ class Player(GameCharacter):
         self.move_player()
         self.animate_player()
         self.recharge()
-        self.projectile.update()
 
     def recharge(self):
         if not self.ready:
