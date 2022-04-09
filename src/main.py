@@ -15,6 +15,8 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 
 # Game window
 window = pygame.display.set_mode(c.DISPLAY_SIZE)
+pygame.display.set_caption("Generic Space Shooter V3")
+pygame.display.set_icon(c.ICON)
 
 # Classes.
 player = Player(c.SHIP, (c.DISPLAY_WIDTH_CENTER, c.DISPLAY_BOTTOM), 26, 37)

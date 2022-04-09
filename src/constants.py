@@ -62,6 +62,9 @@ EXPLOSION = pygame.image.load("src/spritesheets/Explosion.png")
 # HUD
 HUD = pygame.image.load("src/images/Hud.png")
 
+# ICON
+ICON = pygame.image.load("src/images/Icon.png")
+
 # SOUND EFFECTS
 PROJECTILE_SOUND = "src/sounds/Laser.wav"
 HIT_HURT_SOUND = "src/sounds/Hit_Hurt.wav"
