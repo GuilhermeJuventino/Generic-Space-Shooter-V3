@@ -69,6 +69,12 @@ class Player(GameCharacter):
                 self.invincibility_timer = 300
                 self.is_invincible = False
 
+    def reset(self):
+        self.is_alive = True
+        self.is_invincible = False
+        self.invincibility_timer = 300
+        self.lives = 1
+
     def recharge(self):
         if not self.ready:
             current_time = pygame.time.get_ticks()
