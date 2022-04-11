@@ -6,6 +6,7 @@ from object_spawner import ObjectSpawner
 from projectile import Projectile
 from sound_effects import SoundEffects
 from spritesheet import SpriteSheet
+from explosion import Explosion
 
 
 class Player(GameCharacter):
@@ -22,19 +23,51 @@ class Player(GameCharacter):
         self.rect.center = position
 
         self.projectile = ObjectSpawner()
+        #self.explosion = ObjectSpawner()
         self.ready = True
         self.cooldown = 300
         self.projectile_time = 0
         self.projectile_sound = SoundEffects(c.PROJECTILE_SOUND, 0.3)
+        #self.hurt_sound = SoundEffects(c.HIT_HURT_SOUND, 0.6)
+        #self.explosion_sound = SoundEffects(c.EXPLOSION_SOUND, 0.3)
 
         self.animation_loop = 0
 
         self.last_shot = pygame.time.get_ticks()
 
+        self.is_alive = True
+        self.is_invincible = False
+        self.invincibility_timer = 300
+        self.lives = 3
+
     def update(self):
         self.move_player()
         self.animate_player()
         self.recharge()
+        self.invincibility()
+
+    def get_hit(self):
+        if not self.is_invincible and self.is_alive:
+            self.hurt_sound.play()
+            self.is_alive = False
+            self.kill()
+            self.new_explosion = Explosion(c.EXPLOSION, self.rect.center, 30, 30)
+            self.explosion.spawn(self.new_explosion)
+            self.explosion_sound.play()
+            self.lives -= 1
+
+            if self.lives <= 0:
+                self.lives = 0
+
+            self.is_invincible = True
+
+    def invincibility(self):
+        if self.is_alive and self.is_invincible:
+            self.invincibility_timer -= 1
+
+            if self.invincibility_timer <= 0:
+                self.invincibility_timer = 300
+                self.is_invincible = False
 
     def recharge(self):
         if not self.ready:

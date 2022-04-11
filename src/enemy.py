@@ -1,4 +1,3 @@
-import pygame
 import constants as c
 from game_character import GameCharacter
 
@@ -6,7 +5,6 @@ from game_character import GameCharacter
 class Enemy(GameCharacter):
     def __init__(self, image, position, width, height):
         super(Enemy, self).__init__(image, width, height)
-        # self.image = pygame.transform.scale(self.image, (self.width * 8, self.height * 8))
         self.rect = self.image.get_rect()
         self.rect.center = position
 

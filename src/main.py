@@ -39,11 +39,9 @@ hit_hurt_sound = SoundEffects(c.HIT_HURT_SOUND, 0.6)
 
 # Text variables.
 score = 0
-lives = 3
 font = pygame.font.Font("freesansbold.ttf", 25)
+game_over_text = font.render(f"Game Over", False, color.LIGHT_GREY)
 player_death_timer = 200
-player_invincibility_timer = 300
-player_invincible = False
 
 while True:
     # Setting the framerate.
@@ -53,6 +51,8 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+
+    window.fill(color.BLACK)
 
     for asteroid, colls in pygame.sprite.groupcollide(asteroid_group, projectile_group, True, True).items():
 
@@ -66,43 +66,32 @@ while True:
             if score >= 999:
                 score = 999
 
-    if not player_invincible:
-        for p, colls in pygame.sprite.groupcollide(player_group, asteroid_group, True, True).items():
-            hit_hurt_sound.play()
-            explosion = Explosion(c.EXPLOSION, p.rect.center, 30, 30)
-            explosion_group.add(explosion)
-            explosion_sound.play()
-            lives -= 1
-            player.alive = False
 
-    if player_invincible:
+    if not player.is_invincible:
+        for p, colls in pygame.sprite.groupcollide(player_group, asteroid_group, False, True).items():
+            player.get_hit()
+
+    if player.is_invincible:
         for asteroid, colls in pygame.sprite.groupcollide(asteroid_group, player_group, True, False).items():
             hit_hurt_sound.play()
             explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
             explosion_group.add(explosion)
             explosion_sound.play()
 
-    if lives <= 0:
-        lives = 0
-
-    if player_death_timer > 0 and not player.alive:
+    if player_death_timer > 0 and not player.is_alive and player.lives > 0:
         player_death_timer -= 1
 
         if player_death_timer == 0:
             player_group.add(player)
             player.rect.center = (c.DISPLAY_WIDTH_CENTER, c.DISPLAY_BOTTOM)
             player_death_timer = 300
-            player.alive = True
-            player_invincible = True
+            player.is_alive = True
 
-    if player_invincible:
-        player_invincibility_timer -= 1
+    if player.lives == 0:
+        player.projectile.clear()
+        asteroid_timer.spawner.clear()
 
-        if player_invincibility_timer == 0:
-            player_invincible = False
-            player_invincibility_timer = 200
-
-    window.fill(color.BLACK)
+    #window.fill(color.BLACK)
 
     # Bringing sprite group from other classes' files into main.
     asteroid_group.add(asteroid_timer.spawner.group)
@@ -113,18 +102,23 @@ while True:
     asteroid_group.draw(window)
     projectile_group.draw(window)
     explosion_group.draw(window)
+    player.explosion.group.draw(window)
 
     hud_group.draw(window)
 
     score_text = font.render(f"Score: {score}", False, color.LIGHT_GREY)
     window.blit(score_text, (c.DISPLAY_LEFT + 98, c.DISPLAY_TOP + 39))
 
-    lives_text = font.render(f"Lives: {lives}", False, color.LIGHT_GREY)
+    lives_text = font.render(f"Lives: {player.lives}", False, color.LIGHT_GREY)
     window.blit(lives_text, (c.DISPLAY_RIGHT - 255, c.DISPLAY_TOP + 39))
+
+    if player.lives == 0:
+        window.blit(game_over_text, (c.DISPLAY_WIDTH_CENTER - 50, c.DISPLAY_HEIGHT_CENTER))
 
     # Updating sprite groups.
     player_group.update()
     asteroid_timer.update()
     projectile_group.update()
     explosion_group.update()
+    player.explosion.group.update()
     pygame.display.update()

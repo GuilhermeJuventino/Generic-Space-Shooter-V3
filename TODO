@@ -6,6 +6,8 @@ Goal 3: A death and respawn system. (Achieved)
 
 Goal 4: One or two new enemies.
 
+Goal 5: Have the game ready and converted to .exe by the end of the month.
+
 Project structure
 
 Every object (Static or dynamic) like a player or an enemy or a hazard will inherit from a game object class
@@ -33,15 +35,12 @@ To Do list
 
 3: Increasing difficulty. (That could be faster enemies or more enemies/hazards.)
 
-4: Make a system for handling audio. (That being playing sound effects and music.)
-
 5: Improve the sprite sheet animation system
 
 
 In progress list
 
-1: Make a system for handling audio. (That being playing sound effects and music.)
-
+(None)
 
 Complete
 
@@ -63,3 +62,4 @@ Complete
 
 9: Add a HUD with things like score, and lives.
 
+10: Make a system for handling audio. (That being playing sound effects and music.)
