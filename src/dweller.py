@@ -6,7 +6,7 @@ from enemy import Enemy
 
 class Dweller(Enemy):
     def __init__(self, image, position, width, height, target):
-        super(Dweller, self).__init__(image, position, width, height)
+        super().__init__(image, position, width, height)
         self.image = pygame.transform.scale(self.image, (self.width * 2.7, self.height * 2.7))
         self.rect = self.image.get_rect()
         self.target = target

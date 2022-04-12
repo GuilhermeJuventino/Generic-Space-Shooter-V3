@@ -2,6 +2,7 @@ import pygame
 import constants as c
 import ultracolors as color
 from sys import exit
+from random import randrange
 from player import Player
 from dweller import Dweller
 from asteroid_timer import AsteroidTimer
@@ -108,7 +109,9 @@ def game_over():
 
             if keystate[pygame.K_RETURN]:
                 asteroid_group.empty()
+                asteroid_timer.asteroid_spawner.group.empty()
                 dark_asteroid_group.empty()
+                asteroid_timer.dark_asteroid_spawner.group.empty()
                 projectile_group.empty()
                 dweller_group.empty()
                 score = 0
@@ -117,17 +120,8 @@ def game_over():
                 player.invincibility_timer = 1
                 player.is_alive = False
                 player.is_invincible = True
+                asteroid_timer.spawn_timer = randrange(30, 120)
                 running = False
-                '''asteroid_group.empty()
-                dark_asteroid_group.empty()
-                projectile_group.empty()
-                dweller_group.empty()
-                score = 0
-                player_death_timer = 1
-                player.lives = 3
-                player.invincibility_timer = 1
-                player.is_alive = False
-                player.is_invincible = True'''
                 in_game()
 
             if keystate[pygame.K_ESCAPE]:

@@ -4,12 +4,12 @@ from game_character import GameCharacter
 
 class Enemy(GameCharacter):
     def __init__(self, image, position, width, height):
-        super(Enemy, self).__init__(image, width, height)
+        super().__init__(image, width, height)
         self.rect = self.image.get_rect()
         self.rect.center = position
 
     def update(self):
-        super(Enemy, self).update()
+        super().update()
         if self.rect.top > c.DISPLAY_HEIGHT:
             self.kill()
 

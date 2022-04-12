@@ -7,7 +7,7 @@ from sound_effects import SoundEffects
 
 class GameCharacter(GameObject):
     def __init__(self, image, width, height):
-        super(GameCharacter, self).__init__(image, width, height)
+        super().__init__(image, width, height)
         self.speed_x = 0
         self.speed_y = 0
         self.speed = 5
