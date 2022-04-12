@@ -3,6 +3,7 @@ import constants as c
 import ultracolors as color
 from sys import exit
 from player import Player
+from dweller import Dweller
 from asteroid_timer import AsteroidTimer
 from object_collider import ObjectCollider
 from sound_effects import SoundEffects
@@ -28,6 +29,8 @@ hud = HUD(c.HUD, (60, c.DISPLAY_TOP + 20), 92, 14)
 player_group = pygame.sprite.Group()
 player_group.add(player)
 asteroid_group = pygame.sprite.Group()
+dark_asteroid_group = pygame.sprite.Group()
+dweller_group = pygame.sprite.Group()
 projectile_group = pygame.sprite.Group()
 explosion_group = pygame.sprite.Group()
 hud_group = pygame.sprite.Group()
@@ -104,15 +107,27 @@ def game_over():
                 exit()
 
             if keystate[pygame.K_RETURN]:
-                running = False
                 asteroid_group.empty()
+                dark_asteroid_group.empty()
                 projectile_group.empty()
+                dweller_group.empty()
                 score = 0
                 player_death_timer = 1
                 player.lives = 3
                 player.invincibility_timer = 1
                 player.is_alive = False
                 player.is_invincible = True
+                running = False
+                '''asteroid_group.empty()
+                dark_asteroid_group.empty()
+                projectile_group.empty()
+                dweller_group.empty()
+                score = 0
+                player_death_timer = 1
+                player.lives = 3
+                player.invincibility_timer = 1
+                player.is_alive = False
+                player.is_invincible = True'''
                 in_game()
 
             if keystate[pygame.K_ESCAPE]:
@@ -145,18 +160,55 @@ def in_game():
                 explosion_sound.play()
                 score += 1
 
-                if score >= 999:
-                    score = 999
+        for asteroid, colls in pygame.sprite.groupcollide(dark_asteroid_group, projectile_group, True, True).items():
 
+            if colls:
+                hit_hurt_sound.play()
+                explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
+                explosion_group.add(explosion)
+                dweller = Dweller(c.DWELLER, asteroid.rect.center, 20, 20, player)
+                dweller_group.add(dweller)
+                explosion_sound.play()
+                score += 1
+
+        for dw, colls in pygame.sprite.groupcollide(dweller_group, projectile_group, True, True).items():
+
+            if colls:
+                hit_hurt_sound.play()
+                explosion = Explosion(c.EXPLOSION, dw.rect.center, 30, 30)
+                explosion_group.add(explosion)
+                explosion_sound.play()
+                score += 1
+
+        if score >= 999:
+            score = 999
 
         if not player.is_invincible:
             for p, colls in pygame.sprite.groupcollide(player_group, asteroid_group, False, True).items():
+                player.get_hit()
+
+            for p, colls in pygame.sprite.groupcollide(player_group, dark_asteroid_group, False, True).items():
+                player.get_hit()
+
+            for p, colls in pygame.sprite.groupcollide(player_group, dweller_group, False, True).items():
                 player.get_hit()
 
         if player.is_invincible:
             for asteroid, colls in pygame.sprite.groupcollide(asteroid_group, player_group, True, False).items():
                 hit_hurt_sound.play()
                 explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
+                explosion_group.add(explosion)
+                explosion_sound.play()
+
+            for asteroid, colls in pygame.sprite.groupcollide(dark_asteroid_group, player_group, True, False).items():
+                hit_hurt_sound.play()
+                explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
+                explosion_group.add(explosion)
+                explosion_sound.play()
+
+            for dw, colls in pygame.sprite.groupcollide(dweller_group, player_group, True, False).items():
+                hit_hurt_sound.play()
+                explosion = Explosion(c.EXPLOSION, dw.rect.center, 30, 30)
                 explosion_group.add(explosion)
                 explosion_sound.play()
 
@@ -174,15 +226,18 @@ def in_game():
                 running = False
 
         # Bringing sprite group from other classes' files into main.
-        asteroid_group.add(asteroid_timer.spawner.group)
+        asteroid_group.add(asteroid_timer.asteroid_spawner.group)
+        dark_asteroid_group.add(asteroid_timer.dark_asteroid_spawner.group)
         projectile_group.add(player.projectile.group)
 
         # Drawing sprite groups.
         player_group.draw(window)
         asteroid_group.draw(window)
+        dark_asteroid_group.draw(window)
         projectile_group.draw(window)
         explosion_group.draw(window)
         player.explosion.group.draw(window)
+        dweller_group.draw(window)
 
         hud_group.draw(window)
 
@@ -198,6 +253,7 @@ def in_game():
         projectile_group.update()
         explosion_group.update()
         player.explosion.group.update()
+        dweller_group.update()
         pygame.display.update()
 
 title_screen()

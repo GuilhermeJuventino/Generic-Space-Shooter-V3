@@ -38,7 +38,7 @@ class Player(GameCharacter):
         self.is_alive = True
         self.is_invincible = False
         self.invincibility_timer = 300
-        self.lives = 3
+        self.lives = 1
 
     def update(self):
         self.move_player()
@@ -69,11 +69,11 @@ class Player(GameCharacter):
                 self.invincibility_timer = 300
                 self.is_invincible = False
 
-    def reset(self):
+    '''def reset(self):
         self.is_alive = True
         self.is_invincible = False
         self.invincibility_timer = 300
-        self.lives = 1
+        self.lives = 1'''
 
     def recharge(self):
         if not self.ready:
