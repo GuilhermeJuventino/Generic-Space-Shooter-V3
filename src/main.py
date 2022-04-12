@@ -49,7 +49,6 @@ def title_screen():
     while running:
         # Setting the framerate.
         clock.tick(c.FPS)
-        #title_keystate = pygame.key.get_pressed()
         keystate = pygame.key.get_pressed()
         title_text = font.render("Generic Space Shooter V3", True, color.LIGHT_GREY)
         title_text_position = (c.DISPLAY_CENTER)
