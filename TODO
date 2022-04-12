@@ -31,11 +31,9 @@ To Do list
 
 1: Add a particle system.
 
-2: Make a system that manages game states. (Title screen, in game state, pause screen, and game over screen.)
+2: Increasing difficulty. (That could be faster enemies or more enemies/hazards.)
 
-3: Increasing difficulty. (That could be faster enemies or more enemies/hazards.)
-
-5: Improve the sprite sheet animation system
+3: Improve the sprite sheet animation system
 
 
 In progress list
@@ -63,3 +61,5 @@ Complete
 9: Add a HUD with things like score, and lives.
 
 10: Make a system for handling audio. (That being playing sound effects and music.)
+
+11: Make a system that manages game states. (Title screen, in game state, pause screen, and game over screen.)

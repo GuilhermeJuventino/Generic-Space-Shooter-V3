@@ -40,11 +40,10 @@ hit_hurt_sound = SoundEffects(c.HIT_HURT_SOUND, 0.6)
 # Text variables.
 score = 0
 font = pygame.font.Font("freesansbold.ttf", 25)
-#game_over_text = font.render(f"Game Over", False, color.LIGHT_GREY)
 player_death_timer = 200
 
 def title_screen():
-    global ultracolor, constants
+    global ultracolor, constants, game
     running = True
 
     while running:
@@ -81,6 +80,7 @@ def title_screen():
         pygame.display.update()
 
 def game_over():
+    global score, player_death_timer
     running = True
 
     while running:
@@ -90,10 +90,14 @@ def game_over():
         game_over_text = font.render(f"Game Over", True, color.LIGHT_GREY)
         game_over_text_position = (c.DISPLAY_CENTER)
         game_over_text_rect = game_over_text.get_rect(center=game_over_text_position)
+        press_start = font.render("Press ENTER to play again or ESC to quit.", True, color.LIGHT_GREY)
+        press_start_position = (c.DISPLAY_WIDTH_CENTER, c.DISPLAY_HEIGHT_CENTER + 50)
+        press_start_rect = press_start.get_rect(center=press_start_position)
 
         window.fill(color.BLACK)
 
         window.blit(game_over_text, game_over_text_rect)
+        window.blit(press_start, press_start_rect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -102,6 +106,14 @@ def game_over():
 
             if keystate[pygame.K_RETURN]:
                 running = False
+                asteroid_group.empty()
+                projectile_group.empty()
+                score = 0
+                player_death_timer = 1
+                player.lives = 3
+                player.invincibility_timer = 1
+                player.is_alive = False
+                player.is_invincible = True
                 in_game()
 
             if keystate[pygame.K_ESCAPE]:
@@ -113,7 +125,6 @@ def game_over():
 def in_game():
     global score, player_death_timer
     running = True
-    print(running)
 
     while running:
         # Setting the framerate.
@@ -125,8 +136,6 @@ def in_game():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-
-        #window.fill(color.BLACK)
 
         for asteroid, colls in pygame.sprite.groupcollide(asteroid_group, projectile_group, True, True).items():
 
@@ -162,15 +171,8 @@ def in_game():
                 player.is_alive = True
 
         if player.lives == 0:
-            '''player.projectile.clear()
-            asteroid_timer.spawner.clear()'''
-            player.get_hit()
-
-            running = False
-            score = 0
-            player.lives = 3
-
-        #window.fill(color.BLACK)
+            if not explosion_group and not player.explosion.group:
+                running = False
 
         # Bringing sprite group from other classes' files into main.
         asteroid_group.add(asteroid_timer.spawner.group)
@@ -191,9 +193,6 @@ def in_game():
         lives_text = font.render(f"Lives: {player.lives}", True, color.LIGHT_GREY)
         window.blit(lives_text, (c.DISPLAY_RIGHT - 255, c.DISPLAY_TOP + 39))
 
-        '''if player.lives == 0:
-            window.blit(game_over_text, (c.DISPLAY_WIDTH_CENTER - 50, c.DISPLAY_HEIGHT_CENTER))'''
-
         # Updating sprite groups.
         player_group.update()
         asteroid_timer.update()
@@ -203,4 +202,6 @@ def in_game():
         pygame.display.update()
 
 title_screen()
-game_over()
+
+while True:
+    game_over()
