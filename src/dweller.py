@@ -1,6 +1,5 @@
 import pygame
 import constants as c
-from math import sqrt
 from enemy import Enemy
 
 
@@ -13,23 +12,18 @@ class Dweller(Enemy):
         self.rect.center = position
         self.speed_x = 0
         self.speed_y = 0
-        self.speed = 1
+        self.speed = 3
 
     def follow_target(self):
-        if self.rect.top < self.target.rect.y:
-            self.speed_y += self.speed
+        dirvect = pygame.math.Vector2(self.target.rect.x - self.rect.x,
+                                      self.target.rect.y - self.rect.y)
 
-        elif self.rect.bottom > self.target.rect.y:
-            self.speed_y += -self.speed
+        if dirvect.length() > 0:
 
-        if self.rect.right < self.target.rect.x:
-            self.speed_x += self.speed
+            dirvect.normalize()
+            dirvect.scale_to_length(self.speed)
 
-        elif self.rect.left > self.target.rect.x:
-            self.speed_x += -self.speed
-
-        if self.speed_x != 0 and self.speed_y != 0:
-            self.normalize_speed()
+        self.rect.move_ip(dirvect)
 
         if self.rect.top <= 100:
             self.rect.top = 100
@@ -42,10 +36,6 @@ class Dweller(Enemy):
 
         elif self.rect.right >= c.DISPLAY_WIDTH:
             self.rect.right = c.DISPLAY_WIDTH
-
-    def normalize_speed(self):
-        self.speed_x = self.speed_x * (sqrt(2) / 2)
-        self.speed_y = self.speed_y * (sqrt(2) / 2)
 
     def update(self):
         self.follow_target()

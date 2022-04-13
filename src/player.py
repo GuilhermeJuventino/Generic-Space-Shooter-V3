@@ -35,7 +35,7 @@ class Player(GameCharacter):
         self.is_alive = True
         self.is_invincible = False
         self.invincibility_timer = 300
-        self.lives = 1
+        self.lives = 3
 
     def update(self):
         self.move_player()
@@ -51,7 +51,7 @@ class Player(GameCharacter):
             self.new_explosion = Explosion(c.EXPLOSION, self.rect.center, 30, 30)
             self.explosion.spawn(self.new_explosion)
             self.explosion_sound.play()
-            self.lives -= 3
+            self.lives -= 1
 
             if self.lives <= 0:
                 self.lives = 0

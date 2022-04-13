@@ -26,13 +26,13 @@ class AsteroidTimer:
         asteroid_value2 = randrange(0, 6)
 
         if asteroid_value1 == 0 or asteroid_value2 == 0:
-            for i in range(randrange(2, 3)):
+            for i in range(randrange(1, 2)):
                 dark_asteroid_x = randrange(0, c.DISPLAY_WIDTH - 11)
                 new_enemy = DarkAsteroid(c.DARK_ASTEROID, (dark_asteroid_x, 0), 28, 20)
                 self.dark_asteroid_spawner.spawn(new_enemy)
 
         else:
-            for i in range(randrange(2, 4)):
+            for i in range(randrange(1, 3)):
                 asteroid_x = randrange(0, c.DISPLAY_WIDTH - 11)
                 new_enemy = Asteroid(c.ASTEROID, (asteroid_x, 0), 28, 20)
                 self.asteroid_spawner.spawn(new_enemy)

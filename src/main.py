@@ -152,7 +152,7 @@ def in_game():
                 explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
                 explosion_group.add(explosion)
                 explosion_sound.play()
-                score += 1
+                score += 10
 
         for asteroid, colls in pygame.sprite.groupcollide(dark_asteroid_group, projectile_group, True, True).items():
 
@@ -163,7 +163,7 @@ def in_game():
                 dweller = Dweller(c.DWELLER, asteroid.rect.center, 20, 20, player)
                 dweller_group.add(dweller)
                 explosion_sound.play()
-                score += 1
+                score += 20
 
         for dw, colls in pygame.sprite.groupcollide(dweller_group, projectile_group, True, True).items():
 
@@ -172,7 +172,7 @@ def in_game():
                 explosion = Explosion(c.EXPLOSION, dw.rect.center, 30, 30)
                 explosion_group.add(explosion)
                 explosion_sound.play()
-                score += 1
+                score += 50
 
         if score >= 999:
             score = 999
