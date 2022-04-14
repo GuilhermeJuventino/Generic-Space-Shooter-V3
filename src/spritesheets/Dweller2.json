@@ -1,0 +1,58 @@
+{ "frames": {
+   "Dweller2 0.gif": {
+    "frame": { "x": 0, "y": 0, "w": 20, "h": 30 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 30 },
+    "sourceSize": { "w": 20, "h": 30 },
+    "duration": 100
+   },
+   "Dweller2 1.gif": {
+    "frame": { "x": 20, "y": 0, "w": 20, "h": 30 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 30 },
+    "sourceSize": { "w": 20, "h": 30 },
+    "duration": 100
+   },
+   "Dweller2 2.gif": {
+    "frame": { "x": 40, "y": 0, "w": 20, "h": 30 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 30 },
+    "sourceSize": { "w": 20, "h": 30 },
+    "duration": 100
+   },
+   "Dweller2 3.gif": {
+    "frame": { "x": 60, "y": 0, "w": 20, "h": 30 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 30 },
+    "sourceSize": { "w": 20, "h": 30 },
+    "duration": 100
+   },
+   "Dweller2 4.gif": {
+    "frame": { "x": 80, "y": 0, "w": 20, "h": 30 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 20, "h": 30 },
+    "sourceSize": { "w": 20, "h": 30 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "Dweller2.png",
+  "format": "RGBA8888",
+  "size": { "w": 100, "h": 30 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

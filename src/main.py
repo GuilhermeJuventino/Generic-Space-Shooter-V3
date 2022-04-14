@@ -174,7 +174,7 @@ def in_game():
                 hit_hurt_sound.play()
                 explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
                 explosion_group.add(explosion)
-                dweller = Dweller(c.DWELLER, asteroid.rect.center, 20, 20, player)
+                dweller = Dweller(c.DWELLER, asteroid.rect.center, 20, 30, player)
                 dweller_group.add(dweller)
                 explosion_sound.play()
                 score += 2

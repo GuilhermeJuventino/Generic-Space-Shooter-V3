@@ -1,14 +1,18 @@
 import pygame
 import constants as c
-from math import atan2, degrees
+from math import atan2, degrees, floor
 from enemy import Enemy
+from spritesheet import SpriteSheet
 
 
 class Dweller(Enemy):
     def __init__(self, image, position, width, height, target):
         super().__init__(image, position, width, height)
         self.base_image = image
-        self.base_image = pygame.transform.scale(self.base_image, (self.width * 2.7, self.height * 2.7)).convert_alpha()
+        self.spritesheet = SpriteSheet(self.base_image)
+        self.animation = self.spritesheet.get_images(1, 5, 20, 30, scale=2.1)
+        self.base_image = self.animation[0]
+
         self.image = self.base_image
         self.rect = self.image.get_rect()
         self.target = target
@@ -18,7 +22,9 @@ class Dweller(Enemy):
         self.speed = 3
         self.angle = 0
         self.rotation_speed = 0
+
         self.last_update = pygame.time.get_ticks()
+        self.animation_loop = 0
 
     def follow_target(self):
         self.dirvect = pygame.math.Vector2(self.target.rect.x - self.rect.x,
@@ -59,8 +65,16 @@ class Dweller(Enemy):
         new_angle = atan2(coord_2[0] - coord_1[0], coord_2[1] - coord_1[1])
         return degrees(new_angle)
 
+    def animate(self):
+        self.base_image = self.animation[floor(self.animation_loop)]
+        self.animation_loop += 0.25
+
+        if self.animation_loop >= 5:
+            self.animation_loop = 0
+
     def update(self):
         self.follow_target()
+        self.animate()
         self.rotate()
         self.rect.x += self.speed_x
         self.rect.y += self.speed_y

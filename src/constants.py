@@ -57,7 +57,7 @@ SHIP = pygame.image.load("src/spritesheets/Spaceship2.png")
 LASER = pygame.image.load("src/images/Laser.png")
 ASTEROID = pygame.image.load("src/images/Asteroid3.png")
 DARK_ASTEROID = pygame.image.load("src/images/Dark_Asteroid.png")
-DWELLER = pygame.image.load("src/images/Dweller.png")
+DWELLER = pygame.image.load("src/spritesheets/Dweller2.png")
 EXPLOSION = pygame.image.load("src/spritesheets/Explosion.png")
 
 # HUD
