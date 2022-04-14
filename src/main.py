@@ -46,6 +46,7 @@ score = 0
 font = pygame.font.Font("freesansbold.ttf", 25)
 player_death_timer = 200
 
+
 def title_screen():
     global ultracolor, constants, game
     running = True
@@ -68,6 +69,7 @@ def title_screen():
         window.blit(press_start, press_start_rect)
 
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
@@ -91,7 +93,7 @@ def game_over():
         clock.tick(c.FPS)
         keystate = pygame.key.get_pressed()
         game_over_text = font.render(f"Game Over", True, color.LIGHT_GREY)
-        game_over_text_position = (c.DISPLAY_CENTER)
+        game_over_text_position = c.DISPLAY_CENTER
         game_over_text_rect = game_over_text.get_rect(center=game_over_text_position)
         press_start = font.render("Press ENTER to play again or ESC to quit.", True, color.LIGHT_GREY)
         press_start_position = (c.DISPLAY_WIDTH_CENTER, c.DISPLAY_HEIGHT_CENTER + 50)
@@ -103,6 +105,7 @@ def game_over():
         window.blit(press_start, press_start_rect)
 
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
@@ -130,9 +133,14 @@ def game_over():
 
         pygame.display.update()
 
+
 def in_game():
     global score, player_death_timer
     running = True
+    paused = False
+    pause_text = font.render(f"Paused", True, color.LIGHT_GREY)
+    pause_text_position = c.DISPLAY_CENTER
+    pause_text_rect = pause_text.get_rect(center=pause_text_position)
 
     while running:
         # Setting the framerate.
@@ -141,9 +149,15 @@ def in_game():
         window.fill(color.BLACK)
 
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+
+            elif event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_RETURN:
+                    paused = not paused
 
         for asteroid, colls in pygame.sprite.groupcollide(asteroid_group, projectile_group, True, True).items():
 
@@ -152,7 +166,7 @@ def in_game():
                 explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
                 explosion_group.add(explosion)
                 explosion_sound.play()
-                score += 10
+                score += 1
 
         for asteroid, colls in pygame.sprite.groupcollide(dark_asteroid_group, projectile_group, True, True).items():
 
@@ -163,7 +177,7 @@ def in_game():
                 dweller = Dweller(c.DWELLER, asteroid.rect.center, 20, 20, player)
                 dweller_group.add(dweller)
                 explosion_sound.play()
-                score += 20
+                score += 2
 
         for dw, colls in pygame.sprite.groupcollide(dweller_group, projectile_group, True, True).items():
 
@@ -172,12 +186,13 @@ def in_game():
                 explosion = Explosion(c.EXPLOSION, dw.rect.center, 30, 30)
                 explosion_group.add(explosion)
                 explosion_sound.play()
-                score += 50
+                score += 5
 
         if score >= 999:
             score = 999
 
         if not player.is_invincible:
+
             for p, colls in pygame.sprite.groupcollide(player_group, asteroid_group, False, True).items():
                 player.get_hit()
 
@@ -188,6 +203,7 @@ def in_game():
                 player.get_hit()
 
         if player.is_invincible:
+
             for asteroid, colls in pygame.sprite.groupcollide(asteroid_group, player_group, True, False).items():
                 hit_hurt_sound.play()
                 explosion = Explosion(c.EXPLOSION, asteroid.rect.center, 30, 30)
@@ -207,7 +223,9 @@ def in_game():
                 explosion_sound.play()
 
         if player_death_timer > 0 and not player.is_alive and player.lives > 0:
-            player_death_timer -= 1
+
+            if not paused:
+                player_death_timer -= 1
 
             if player_death_timer == 0:
                 player_group.add(player)
@@ -216,6 +234,7 @@ def in_game():
                 player.is_alive = True
 
         if player.lives == 0:
+
             if not explosion_group and not player.explosion.group:
                 running = False
 
@@ -241,14 +260,20 @@ def in_game():
         lives_text = font.render(f"Lives: {player.lives}", True, color.LIGHT_GREY)
         window.blit(lives_text, (c.DISPLAY_RIGHT - 255, c.DISPLAY_TOP + 39))
 
+        if paused:
+            window.blit(pause_text, pause_text_rect)
+
         # Updating sprite groups.
-        player_group.update()
-        asteroid_timer.update()
-        projectile_group.update()
-        explosion_group.update()
-        player.explosion.group.update()
-        dweller_group.update()
+        if not paused:
+            player_group.update()
+            asteroid_timer.update()
+            projectile_group.update()
+            explosion_group.update()
+            player.explosion.group.update()
+            dweller_group.update()
+
         pygame.display.update()
+
 
 title_screen()
 
