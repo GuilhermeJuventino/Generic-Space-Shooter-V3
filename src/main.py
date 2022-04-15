@@ -64,10 +64,15 @@ def title_screen():
         press_start_position = (c.DISPLAY_WIDTH_CENTER, c.DISPLAY_HEIGHT_CENTER + 50)
         press_start_rect = press_start.get_rect(center=press_start_position)
 
+        controlls = font.render("Move with arrow keys and shoot lasers with 'Z' key.", True, color.LIGHT_GREY)
+        controlls_position = (c.DISPLAY_WIDTH_CENTER, c.DISPLAY_HEIGHT_CENTER + 120)
+        controlls_rect = controlls.get_rect(center=controlls_position)
+
         window.fill(color.BLACK)
 
         window.blit(title_text, title_text_rect)
         window.blit(press_start, press_start_rect)
+        window.blit(controlls, controlls_rect)
 
         for event in pygame.event.get():
 
