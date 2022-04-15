@@ -43,7 +43,8 @@ hit_hurt_sound = SoundEffects(c.HIT_HURT_SOUND, 0.6)
 
 # Text variables.
 score = 0
-font = pygame.font.Font("freesansbold.ttf", 25)
+#font = pygame.font.Font("freesansbold.ttf", 25)
+font = pygame.font.Font(c.FONT, 21)
 player_death_timer = 200
 
 
@@ -255,10 +256,10 @@ def in_game():
         hud_group.draw(window)
 
         score_text = font.render(f"Score: {score}", True, color.LIGHT_GREY)
-        window.blit(score_text, (c.DISPLAY_LEFT + 98, c.DISPLAY_TOP + 39))
+        window.blit(score_text, (c.DISPLAY_LEFT + 98, c.DISPLAY_TOP + 33))
 
         lives_text = font.render(f"Lives: {player.lives}", True, color.LIGHT_GREY)
-        window.blit(lives_text, (c.DISPLAY_RIGHT - 255, c.DISPLAY_TOP + 39))
+        window.blit(lives_text, (c.DISPLAY_RIGHT - 255, c.DISPLAY_TOP + 33))
 
         if paused:
             window.blit(pause_text, pause_text_rect)
